@@ -36,7 +36,7 @@ Feature: UI Ebay General Operations
       | Case register | register  |
 
 ######################################################################
-# IMPORTANT: 2 SCENARIOS BELOW ARE JUST EXAMPLES AND ARE NOR AUTOMATED
+# IMPORTANT: 2 SCENARIOS BELOW ARE JUST EXAMPLES AND ARE NOT AUTOMATED
 ######################################################################
 
   Scenario Outline: Search and Add some product to the shopping cart

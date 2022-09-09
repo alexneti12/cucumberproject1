@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,16 +22,14 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class GeneralOperationsSteps {
-
-
-
-    public static WebDriver driver;
+public class GeneralOperationsSteps extends BasePage {
 
     @Before
     public void setDriver() throws Throwable {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        driver = new ChromeDriver(options);
     }
 
     @After
@@ -47,14 +46,14 @@ public class GeneralOperationsSteps {
     @And("I accept the cookies")
     public void iAcceptTheCookies() throws Throwable {
         WebElement element = driver.findElement(By.xpath("//button[@id='gdpr-banner-accept']"));
-        element.click();
+        checkIfElementExistAndClick(element);
         Thread.sleep(1000);
     }
     @When("I search for a {string}")
     public void i_search_for_a(String string) throws Throwable {
         WebElement element = driver.findElement(By.xpath("//input[@id='gh-ac']"));
         // Enter something to search for
-        element.sendKeys(string);
+        fillElement(element, string);
         // Submit the form. WebDriver will find the form for us from the element
         element.submit();
     }
@@ -72,19 +71,20 @@ public class GeneralOperationsSteps {
     @When("I click on shopping cart icon")
     public void iClickOnShoppingCartIcon() throws Throwable {
         WebElement element = driver.findElement(By.xpath("//a[@href='https://cart.payments.ebay.com/sc/view']"));
-        element.click();
+        checkIfElementExistAndClick(element);
         Thread.sleep(1000);
     }
 
     @Then("I should don´t have any items in my cart")
     public void iShouldDonTHaveAnyItemsInMyCart() throws Throwable  {
         WebElement element = driver.findElement(By.xpath("//span[contains(text(),'have any items in your cart')]"));
+        checkIfElementExist(element);
     }
 
     @And("I click on start shopping button")
     public void iClickOnStartShoppingButton() throws Throwable {
         WebElement element = driver.findElement(By.xpath("//a[@href='https://www.ebay.com']"));
-        element.click();
+        checkIfElementExistAndClick(element);
         Thread.sleep(1000);
     }
 
@@ -125,7 +125,7 @@ public class GeneralOperationsSteps {
                 break;
         }
 
-        element.click();
+        checkIfElementExistAndClick(element);
         Thread.sleep(1000);
     }
 
@@ -151,7 +151,7 @@ public class GeneralOperationsSteps {
     @And("I Click on the first product in the results")
     public void iClickOnTheFirstProductInTheResults() throws Throwable {
         WebElement element = driver.findElement(By.xpath("//div[@id='srp-river-results']/ul/li[2]/div[1]/div[1]"));
-        element.click();
+        checkIfElementExistAndClick(element);
         Thread.sleep(1000);
     }
 
